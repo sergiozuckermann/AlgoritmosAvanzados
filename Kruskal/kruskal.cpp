@@ -80,9 +80,9 @@ int kruskal(){
     std::set<std::set<int>> u;
     std::set<std::set<int>> answer;
     int a,b,sum=0;
+
     for (size_t i = 0; i < firstNumbers.size(); ++i) {
         std::set<int> v= {};
-        std::set<int> temp= {};
         a = firstNumbers[i];
         b = secondNumbers[i];
         v.insert(a);
@@ -97,9 +97,9 @@ int kruskal(){
         }
         
         if (test == false) {
-            temp.insert(a);
-            temp.insert(b);
+            cout<<a<<" "<<b<<endl;
             u.insert(v);
+            answer.insert(v);
             sum=sum+thirdNumbers[i];
             
             //CODIGO AQUI
