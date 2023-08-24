@@ -3,13 +3,11 @@
 #include <string>
 #include <sstream>
 #include <vector>
-#include <set>
+#include <list>
 #include <algorithm>
 using namespace std;
 
-
-
-int kruskal(){
+int kruskal() {
     std::ifstream inputFile("example.txt");
 
     if (!inputFile.is_open()) {
@@ -34,10 +32,7 @@ int kruskal(){
 
     inputFile.close();
 
-	
-    // Print the contents of the vectors
-    std::cout << "Organized Edges: ";
-    std::cout << std::endl;
+    std::cout << "Organized Edges: " << std::endl;
     for (size_t i = 0; i < firstNumbers.size(); ++i) {
         std::cout << firstNumbers[i] << " ";
         std::cout << secondNumbers[i] << " ";
@@ -45,15 +40,12 @@ int kruskal(){
         std::cout << std::endl;
     }
 
-
     for (size_t i = 1; i < thirdNumbers.size(); ++i) {
         int key1 = firstNumbers[i];
         int key2 = secondNumbers[i];
         int key3 = thirdNumbers[i];
         int j = i - 1;
-        
-        // Move elements of arr[0..i-1] that are greater than key
-        // to one position ahead of their current position
+
         while (j >= 0 && thirdNumbers[j] > key3) {
             firstNumbers[j + 1] = firstNumbers[j];
             secondNumbers[j + 1] = secondNumbers[j];
@@ -65,74 +57,64 @@ int kruskal(){
         thirdNumbers[j + 1] = key3;
     }
 
-    // Print the contents of the vectors
-    std::cout << "Organized Edges: ";
-    std::cout << std::endl;
+    std::cout << "Organized Edges: " << std::endl;
     for (size_t i = 0; i < firstNumbers.size(); ++i) {
         std::cout << firstNumbers[i] << " ";
         std::cout << secondNumbers[i] << " ";
         std::cout << thirdNumbers[i] << " ";
         std::cout << std::endl;
-        
     }
 
-
-    std::set<std::set<int>> u;
-    std::set<std::set<int>> answer;
-    int a,b,sum=0;
+    std::list<std::list<int>> u;
+    std::list<std::list<int>> answer;
+    int a, b, sum = 0;
 
     for (size_t i = 0; i < firstNumbers.size(); ++i) {
-        std::set<int> v= {};
+        std::list<int> v = {};
         a = firstNumbers[i];
         b = secondNumbers[i];
-        v.insert(a);
-        v.insert(b);
+        v.push_back(a);
+        v.push_back(b);
         cout << "Current Edge: { ";
         for (int vertex : v) {
-        cout << vertex << " ";
+            cout << vertex << " ";
         }
         cout << "}" << endl;
         bool test = false;
 
-        for (const set<int>& subset : u) {
+        for (const list<int>& subset : u) {
             if (subset == v) {
                 test = true;
                 break;
             }
         }
-        
+
         if (test == false) {
-            cout<<a<<" "<<b<<endl;
-            u.insert(v);
-            answer.insert(v);
-            sum=sum+thirdNumbers[i];
-            
-            //CODIGO AQUI
+            cout << a << " " << b << endl;
+            u.push_back(v);
+            answer.push_back(v);
+            sum = sum + thirdNumbers[i];
+
+            // CODE HERE
         }
         test = false;
-        v.erase(a);
-        v.erase(b);
-
+        v.remove(a);
+        v.remove(b);
     }
-    cout << "Sets of Vertices in u:" << endl;
-    for (const std::set<int>& subset : u) {
+    cout << "Lists of Vertices in u:" << endl;
+    for (const std::list<int>& subset : u) {
         cout << "{ ";
         for (int vertex : subset) {
             cout << vertex << " ";
         }
-    cout << "}" << endl;
+        cout << "}" << endl;
     }
-    cout << "Final sum:" << sum << endl;
+    cout << "Final sum: " << sum << endl;
     cout << endl;
     return 0;
 }
 
 int main() {
-
-	kruskal();
-	return 0;
-
-
+    kruskal();
+    return 0;
 }
-
-
