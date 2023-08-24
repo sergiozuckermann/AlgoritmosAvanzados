@@ -87,6 +87,11 @@ int kruskal(){
         b = secondNumbers[i];
         v.insert(a);
         v.insert(b);
+        cout << "Current Edge: { ";
+        for (int vertex : v) {
+        cout << vertex << " ";
+        }
+        cout << "}" << endl;
         bool test = false;
 
         for (const set<int>& subset : u) {
@@ -109,12 +114,13 @@ int kruskal(){
         v.erase(b);
 
     }
-    cout << "Final Minimum Spanning Tree (Disjoint Sets):" << endl;
-    for (const std::set<int>& subset : answer) {
+    cout << "Sets of Vertices in u:" << endl;
+    for (const std::set<int>& subset : u) {
+        cout << "{ ";
         for (int vertex : subset) {
             cout << vertex << " ";
         }
-        cout << endl;
+    cout << "}" << endl;
     }
     cout << "Final sum:" << sum << endl;
     cout << endl;
