@@ -82,16 +82,26 @@ int kruskal() {
         cout << "}" << endl;
         bool test = false;
 
-        for (const list<int>& subset : u) {
-            if (subset == v) {
+        for (const std::list<int>& subset : u) {
+            if (std::find(subset.begin(), subset.end(), a) != subset.end() &&
+                std::find(subset.begin(), subset.end(), b) != subset.end()) {
                 test = true;
                 break;
             }
+        }
+        
+
+        if (test) {
+            std::cout << "Both elements are in at least one subset." << std::endl;
+        } 
+        else {
+        std::cout << "At least one of the elements is not in any subset." << std::endl;
         }
 
         if (test == false) {
             cout << a << " " << b << endl;
             u.push_back(v);
+            v.push_back(thirdNumbers[i]);
             answer.push_back(v);
             sum = sum + thirdNumbers[i];
 
@@ -102,7 +112,7 @@ int kruskal() {
         v.remove(b);
     }
     cout << "Lists of Vertices in u:" << endl;
-    for (const std::list<int>& subset : u) {
+    for (const std::list<int>& subset : answer) {
         cout << "{ ";
         for (int vertex : subset) {
             cout << vertex << " ";
