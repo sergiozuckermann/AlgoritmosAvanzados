@@ -5,7 +5,44 @@
 #include <vector>
 #include <list>
 #include <algorithm>
+#include <set>
 using namespace std;
+
+std::set<std::set<int>> mergeSubsets(std::set<std::set<int>> inputSets) {
+    std::set<std::set<int>> mergedSets;
+
+    for (const std::set<int>& subset : inputSets) {
+        bool merged = false;
+        std::set<std::set<int>> subsetsToMerge;
+
+        // Collect subsets to merge into this iteration's subset
+        for (const std::set<int>& mergedSubset : mergedSets) {
+            for (int element : subset) {
+                if (mergedSubset.count(element)) {
+                    subsetsToMerge.insert(mergedSubset);
+                    break;
+                }
+            }
+        }
+
+        if (!subsetsToMerge.empty()) {
+            std::set<int> mergedSubset = subset;
+            for (const std::set<int>& sub : subsetsToMerge) {
+                mergedSubset.insert(sub.begin(), sub.end());
+                mergedSets.erase(sub);
+            }
+            mergedSets.insert(mergedSubset);
+            merged = true;
+        }
+
+        // If not merged, add the subset as is to the mergedSets
+        if (!merged) {
+            mergedSets.insert(subset);
+        }
+    }
+
+    return mergedSets;
+}
 
 int kruskal() {
     std::ifstream inputFile("example.txt");
@@ -65,16 +102,16 @@ int kruskal() {
         std::cout << std::endl;
     }
 
-    std::list<std::list<int>> u;
-    std::list<std::list<int>> answer;
+    std::set<std::set<int>> u;
+    std::set<std::set<int>> answer;
     int a, b, sum = 0;
 
     for (size_t i = 0; i < firstNumbers.size(); ++i) {
-        std::list<int> v = {};
+        std::set<int> v = {};
         a = firstNumbers[i];
         b = secondNumbers[i];
-        v.push_back(a);
-        v.push_back(b);
+        v.insert(a);
+        v.insert(b);
         cout << "Current Edge: { ";
         for (int vertex : v) {
             cout << vertex << " ";
@@ -82,7 +119,7 @@ int kruskal() {
         cout << "}" << endl;
         bool test = false;
 
-        for (const std::list<int>& subset : u) {
+        for (const std::set<int>& subset : u) {
             if (std::find(subset.begin(), subset.end(), a) != subset.end() &&
                 std::find(subset.begin(), subset.end(), b) != subset.end()) {
                 test = true;
@@ -91,28 +128,22 @@ int kruskal() {
         }
         
 
-        if (test) {
-            std::cout << "Both elements are in at least one subset." << std::endl;
-        } 
-        else {
-        std::cout << "At least one of the elements is not in any subset." << std::endl;
-        }
 
         if (test == false) {
             cout << a << " " << b << endl;
-            u.push_back(v);
-            v.push_back(thirdNumbers[i]);
-            answer.push_back(v);
+            u.insert(v);
+            v.insert(thirdNumbers[i]);
+            answer.insert(v);
             sum = sum + thirdNumbers[i];
-
+            u=mergeSubsets(u);
             // CODE HERE
         }
         test = false;
-        v.remove(a);
-        v.remove(b);
+        v.erase(a);
+        v.erase(b);
     }
-    cout << "Lists of Vertices in u:" << endl;
-    for (const std::list<int>& subset : answer) {
+    cout << "Vertices in u:" << endl;
+    for (const std::set<int>& subset : answer) {
         cout << "{ ";
         for (int vertex : subset) {
             cout << vertex << " ";
