@@ -87,7 +87,7 @@ int kruskal()
 
     inputFile.close();
 
-        /*Inicia sort*/
+    /*Inicia sort*/
     for (size_t i = 1; i < thirdNumbers.size(); ++i)
     {
         int key1 = firstNumbers[i];
@@ -110,6 +110,7 @@ int kruskal()
     }
     /*Termina sort*/
 
+    cout << endl;
     std::cout << "Organized Edges: " << std::endl;   // Imprime los datos del archivo ordenados
     for (size_t i = 0; i < firstNumbers.size(); ++i) // Imprime los datos del archivo ordenados
     {
@@ -125,6 +126,7 @@ int kruskal()
     std::set<std::set<int>> answer;
     int a, b, sum = 0;
 
+    cout << "Adding edges..." << endl;
     for (size_t i = 0; i < firstNumbers.size(); ++i) // Recorre los datos ordenados
     {
         // v funciona como una temporal para la comparación y futura inserción en u
@@ -148,7 +150,6 @@ int kruskal()
 
         if (test == false) // Si el camino no existe, se agrega
         {
-            cout << "Adding edges..." << endl;
             cout << "The edge { "; // Imprime el camino actual
             for (int vertex : v)
             {
