@@ -53,17 +53,6 @@ std::set<std::set<int>> mergeSubsets(std::set<std::set<int>> inputSets) // Funci
         }
         /*Termina el mergeador 3000*/
     }
-    /*
-    for (const std::set<int> &subset : mergedSets)
-    { // Imprime el set mergeado
-        std::cout << "AQUÍ ES LA IMPRESIÓN DEL SET MERGEADO:" << std::endl;
-        std::cout << "{ ";
-        for (int vertex : subset)
-        {
-            std::cout << vertex << " ";
-        }
-        std::cout << "}" << std::endl;
-    }*/
 
     return mergedSets; // Regresa el set mergeado
 }
@@ -98,17 +87,7 @@ int kruskal()
 
     inputFile.close();
 
-    std::cout << "Unorganized Edges: " << std::endl; // Imprime los datos del archivo
-    for (size_t i = 0; i < firstNumbers.size(); ++i) // Imprime los datos del archivo
-    {
-        std::cout << firstNumbers[i] << " ";
-        std::cout << secondNumbers[i] << " ";
-        std::cout << thirdNumbers[i] << " ";
-        std::cout << std::endl;
-    }
-    std::cout << std::endl;
-
-    /*Inicia sort*/
+        /*Inicia sort*/
     for (size_t i = 1; i < thirdNumbers.size(); ++i)
     {
         int key1 = firstNumbers[i];
@@ -155,13 +134,6 @@ int kruskal()
         v.insert(a);
         v.insert(b);
 
-        cout << "Current Edge: { "; // Imprime el camino actual
-        for (int vertex : v)
-        {
-            cout << vertex << " ";
-        }
-        cout << "}" << endl;
-
         bool test = false; // Se utiliza para saber si el camino ya existe
 
         for (const std::set<int> &subset : u) // Checa si el camino ya existe
@@ -176,8 +148,13 @@ int kruskal()
 
         if (test == false) // Si el camino no existe, se agrega
         {
-            cout << a << " " << b << " has been accepted" << endl
-                 << endl;                // Imprime que el camino ha sido aceptado
+            cout << "Adding edges..." << endl;
+            cout << "The edge { "; // Imprime el camino actual
+            for (int vertex : v)
+            {
+                cout << vertex << " ";
+            }
+            cout << "} has been accepted." << endl;
             u.insert(v);                 // Inserta todo el subset
             v.insert(thirdNumbers[i]);   // Inserta el peso
             answer.insert(v);            // Subset final
@@ -196,7 +173,7 @@ int kruskal()
 
     for (const std::set<int> &subset : u)
     { // Imprime el set mergeado
-        std::cout << "AQUÍ ES LA IMPRESIÓN DEL SET MERGEADO:" << std::endl;
+        std::cout << "All nodes have been visited:" << std::endl;
         std::cout << "{ ";
         for (int vertex : subset)
         {
@@ -204,19 +181,9 @@ int kruskal()
         }
         std::cout << "}" << std::endl;
     }
-    cout << "Final path:" << endl;
-    /*
-    for (const std::set<int> &subset : answer)
-    {
-        cout << "{ ";
-        for (int vertex : subset)
-        {
-            cout << vertex << " ";
-        }
-        cout << "}" << endl;
-    }*/
 
-    cout << "Final sum: " << sum << endl;
+    cout << endl;
+    cout << "Final sum of the weights: " << sum << endl;
     cout << endl;
     return 0;
 }
