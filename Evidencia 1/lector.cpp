@@ -20,32 +20,31 @@ int main()
     std::string virus1=readTxt("mcode1.txt");
     std::string virus2=readTxt("mcode2.txt");
     std::string virus3=readTxt("mcode3.txt");
-    std::cout << "codigo1" << text1 << endl;
-    std::cout <<"codigo2" << text2 << endl;
-    std::cout << "virus1" << virus1 << endl;
-    std::cout <<"virus2" << virus2 << endl;
-    std::cout <<"virus3" << virus3 << endl;
+    int opcion;
+    while(opcion!=4){
+        std::cout << "Ingrese una opcion: " << endl;
+        std::cout << "1. Opción 1" << endl;
+        std::cout << "2. Opción 2" << endl;
+        std::cout << "3. Función 3" << endl;
+        std::cout << "4. Salir" << endl;
 
-    // std::cout << "Ingrese una opcion: " << endl;
-    // std::cout << "1. Opción 1" << endl;
-    // std::cout << "2. Opción 2" << endl;
-    // std::cout << "3. Salir" << endl;
+        cin >> opcion;
 
-    // int opcion;
-    // cin >> opcion;
+         if (opcion == 1) {
 
-    // if (opcion == 1) {
-    //     //Insertar la función que pide
-    // }
-    // else if (opcion == 2) {
-    //     //Insertar la función que pide
-    // }
-    // else if (opcion == 3) {
-    //     std::cout << "Adios" << endl;
-    // }
-    // else {
-    //     std::cout << "Invalido" << endl;
-    //     main();
-    // }
+         }
+         else if (opcion == 2) {
+
+         }
+         else if (opcion == 3) {
+            
+         }
+        else if (opcion == 4) {
+           std::cout << "Adios" << endl;
+         }
+         else {
+            std::cout << "Invalido" << endl;
+        }
+    } 
      return 0;
 }
